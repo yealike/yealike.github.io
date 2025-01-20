@@ -1,211 +1,201 @@
 <!DOCTYPE html>
-<html lang="zh_CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>world</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>程晶晶，大宝贝！</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
     body {
-      background: #000;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb);
+      background-size: 400% 400%;
+      animation: bgGradient 8s ease infinite;
+      overflow: hidden;
+      position: relative;
     }
-    @keyframes runing {
+
+    @keyframes bgGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: calc(3rem + 1vw); /* 动态字体大小，随屏幕变化 */
+      font-weight: bold;
+      text-shadow: 0 0 20px #ff69b4, 0 0 30px #ff1493;
+      color: white;
+      animation: textFlicker 1.5s ease-in-out infinite, textColorShift 6s linear infinite;
+      text-align: center;
+      padding: 0 1rem; /* 避免小屏幕内容被挤出 */
+    }
+
+    @keyframes textFlicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+
+    @keyframes textColorShift {
+      0% { color: #ff69b4; }
+      25% { color: #ff1493; }
+      50% { color: #ff6ec7; }
+      75% { color: #ffc1e3; }
+      100% { color: #ff69b4; }
+    }
+
+    .heart {
+      position: absolute;
+      width: 15px; /* 缩小爱心大小适应小屏幕 */
+      height: 15px;
+      background-color: #ff69b4;
+      transform: rotate(45deg);
+      animation: floatUp 5s infinite ease-in-out;
+      box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+    }
+
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: #ff69b4;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -7.5px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -7.5px;
+      top: 0;
+    }
+
+    @keyframes floatUp {
       0% {
-        transform: rotate(23.6deg) rotateX(-23.6deg) rotateY(0deg);
+        transform: translateY(0) rotate(45deg) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-100px) rotate(45deg) scale(1.2);
+        opacity: 0.7;
       }
       100% {
-        transform: rotate(23.6deg) rotateX(-23.6deg) rotateY(360deg);
+        transform: translateY(-200px) rotate(45deg) scale(0.8);
+        opacity: 0;
       }
     }
-    .big {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      /*position: relative;*/
-      width: 1000px;
-      height: 1000px;
-      transform: translate(-50%,-55%);
-      /*background: seagreen;*/
-    }
-    .bigbox {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 600px;
-      height: 600px;
-      /*background: seagreen;*/
-      transform: translate(-50%,-50%);
-      perspective: 1200px;
-    }
-    .box {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      /*background: orangered;*/
-      transform-style: preserve-3d;
-      animation: runing 15s linear infinite;
-    }
-    .box div {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      color: #fff;
-      border: 1px solid #fff;
-      border-radius: 50%;
+
+    @media (max-width: 768px) {
+      .heart {
+        width: 10px;
+        height: 10px;
+      }
+
+      .heart::before, .heart::after {
+        width: 10px;
+        height: 10px;
+      }
     }
 
-    .box div:nth-child(1) {
+    .cute-elements {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none; /* 不影响用户交互 */
+      z-index: 1;
+    }
 
-    }
-    .box div:nth-child(2) {
-      transform: rotateY(22.5deg);
-    }
-    .box div:nth-child(3) {
-      transform: rotateY(45deg);
-    }
-    .box div:nth-child(4) {
-      transform: rotateY(67.5deg);
-    }
-    .box div:nth-child(5) {
-      transform: rotateY(90deg);
-    }
-    .box div:nth-child(6) {
-      transform: rotateY(112.5deg);
-    }
-    .box div:nth-child(7) {
-      transform: rotateY(135deg);
-    }
-    .box div:nth-child(8) {
-      transform: rotateY(157.5deg);
-    }
-    .box div:nth-child(9) {
-      transform: translateY(-300px) rotateX(90deg) scale(0);
-    }
-    .box div:nth-child(10) {
-      transform: translateY(-225px) rotateX(90deg) scale(.66);
-    }
-    .box div:nth-child(11) {
-      transform: translateY(-150px) rotateX(90deg) scale(.865);
-    }
-    .box div:nth-child(12) {
-      transform: translateY(-75px) rotateX(90deg) scale(.97);
-    }
-    .box div:nth-child(13) {
-      transform: translateY(0) rotateX(90deg) scale(1);
-    }
-    .box div:nth-child(14) {
-      transform: translateY(75px) rotateX(90deg) scale(.97);
-    }
-    .box div:nth-child(15) {
-      transform: translateY(150px) rotateX(90deg) scale(.865);
-    }
-    .box div:nth-child(16) {
-      transform: translateY(225px) rotateX(90deg) scale(.66);
-    }
-    .box div:nth-child(17) {
-      transform: translateY(300px) rotateX(90deg) scale(0);
-    }
-    .but {
+    .star, .cloud {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 3px;
-      height: 680px;
-      background: #fff;
-      border-radius: 0;
-      transform: translate(-50%,-50%) rotate(23.6deg);
+      animation: float 8s infinite ease-in-out;
+      z-index: 1;
     }
-    .fix {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 680px;
-      height: 680px;
-      z-index: 99;
-      /*background: seagreen;*/
-      /*opacity: .5;*/
-      border-radius:50%;
-      border-top: 20px solid #fff;
-      border-right: 20px solid #fff;
-      border-left: 20px solid transparent;
-      border-bottom: 20px solid transparent;
-      transform: translate(-52%,-51%) rotate(68.6deg);
-    }
-    .foot {
-      position: absolute;
-      top: 850px;
-      left: 50%;
-      transform: translate(-50%,0);
-      z-index: 3;
-      width: 30px;
-      height: 60px;
-      background: #fff;
-    }
-    .footer {
-      position: absolute;
-      top: 765px;
-      left: 50%;
-      width:300px;
-      height:300px;
-      border:solid 1px black;
-      background: #fff;
-      border-radius: 50%;
-      transform: translate(-50%,0) rotateX(80deg);
-    }
-    .footer:after{
-      content: '';
-      display:inline-block;
-      width:300px;
-      height: 320px;
-      position:relative;
+
+    .star {
+      width: 20px;
+      height: 20px;
+      background: gold;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      box-shadow: 0 0 10px rgba(255, 223, 0, 0.7);
       opacity: 0.8;
-      background: #fff;
-      top:50%;
-      left:-0.5px;
-      border-left: 1px solid #000;
-      border-right: 1px solid #000;
-      border-bottom: 1px solid #000;
-      border-bottom-left-radius: 45%;
-      border-bottom-right-radius: 45%;
+    }
+
+    .cloud {
+      width: 50px;
+      height: 30px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    }
+
+    .cloud::before, .cloud::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 30px;
+      height: 30px;
+      top: -10px;
+      left: -15px;
+    }
+
+    .cloud::after {
+      width: 40px;
+      height: 40px;
+      top: -20px;
+      left: 25px;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 0.9; }
+      50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+      100% { transform: translateY(0) scale(1); opacity: 0.9; }
     }
   </style>
 </head>
 <body>
-<div class="big">
-  <div class="bigbox">
-    <div class="box">
+  <h1>程晶晶，大宝贝！</h1>
 
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div class="but"></div>
+  <!-- 可爱元素 -->
+  <div class="cute-elements">
+    <div class="star" style="top: 10%; left: 20%; animation-duration: 8s;"></div>
+    <div class="star" style="top: 30%; left: 70%; animation-duration: 10s;"></div>
+    <div class="cloud" style="top: 60%; left: 40%; animation-duration: 12s;"></div>
+    <div class="cloud" style="top: 80%; left: 10%; animation-duration: 15s;"></div>
   </div>
-  <div class="fix"></div>
-  <div class="foot"></div>
-  <div class="footer"></div>
-</div>
+
+  <script>
+    // Function to create floating hearts
+    function createHeart(x, y) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = x ? `${x}px` : Math.random() * window.innerWidth + 'px';
+      heart.style.top = y ? `${y}px` : '100vh';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // Random duration between 3-6s
+      document.body.appendChild(heart);
+
+      // Remove the heart after animation ends
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    // Generate hearts at intervals
+    setInterval(() => createHeart(), 500);
+
+    // Add hearts on touch/click
+    document.body.addEventListener('click', (e) => {
+      createHeart(e.clientX, e.clientY);
+    });
+  </script>
 </body>
 </html>
